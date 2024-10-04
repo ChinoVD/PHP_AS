@@ -1,0 +1,153 @@
+/* styles.css */
+:root {
+    --color-primario: red; /* Cambié 'rojo' por 'red' */
+    --color-secundario: #f4f4f4; /* Añadido el guion */
+    --color-blanco: #FFFFFF; /* Color base para limpieza */
+    --color-azul-claro: #ADD8E1; /* Color que evoca tranquilidad */
+    --color-verde-suave: #D1E7D5; /* Color que representa salud y bienestar */
+    --color-gris-claro: #F0F0F0; /* Fondo neutro */
+    --color-beige: #E3D6C9; /* Color cálido y acogedor */
+    --color-verde-esmeralda: #50B948; /* Color de vitalidad */
+    --color-gris-oscuro: #696969; /* Color para texto y elementos gráficos */
+}
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fuentes globales */
+body {
+    font-family: 'Roboto', 'Arial', sans-serif; /* Asegúrese de usar una coma aquí */
+    line-height: 1.6;
+    color: var(--color-gris-oscuro); /* Color de texto por defecto */
+    background-color: var(--color-secundario); /* Color de fondo */
+}
+
+/* Encabezados */
+h1 {
+    font-size: 2.5rem; /* Tamaño de fuente para h1 */
+    color: var(--color-primario); /* Color para h1 */
+}
+
+h2 {
+    font-size: 2rem; /* Tamaño de fuente para h2 */
+    color: var(--color-verde-esmeralda); /* Color para h2 */
+}
+
+h3 {
+    font-size: 1.75rem; /* Tamaño de fuente para h3 */
+    color: var(--color-blanco); /* Color para h3 */
+}
+
+/* Párrafos */
+p {
+    font-size: 1rem; /* Tamaño de fuente para párrafos */
+    margin-bottom: 1rem; /* Espacio entre párrafos */
+    color: var(--color-gris-oscuro); /* Color de texto para párrafos */
+}
+
+/* Enlaces */
+a {
+    color: var(--color-azul-claro); /* Color de enlace */
+    text-decoration: none; /* Sin subrayado */
+}
+
+a:hover {
+    text-decoration: underline; /* Subrayado al pasar el mouse */
+}
+
+/* Estilos adicionales */
+button {
+    background-color: var(--color-primario); /* Color de fondo de botones */
+    color: var(--color-blanco); /* Color del texto del botón */
+    border: none; /* Sin borde */
+    padding: 10px 15px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor a mano */
+}
+
+button:hover {
+    background-color: var(--color-verde-esmeralda); /* Color de fondo al pasar el mouse */
+}
+
+*,
+*::before,
+*::after {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+}
+
+/* no default styling for all inputs and button - to can edit all ourselves */
+input,
+button {
+   appearance: none;
+   border: none;
+   outline: none;
+   background: none;
+}
+
+body {
+   font-family: 'Roboto', sans-serif; /* Asegúrate de que la fuente esté definida */
+}
+
+h1,
+span {
+   color: rgb(36, 0, 70);
+}
+
+.form {
+   width: 100%; /* Ajustar al 100% para que se adapte al contenedor */
+   position: relative;
+   height: 50px;
+   margin-top: 20px; /* Espacio entre campos */
+   overflow: hidden;
+}
+
+.form input {
+   width: 100%;
+   height: 100%;
+   color: rgb(36, 0, 70);
+   padding-top: 20px;
+}
+
+.form label {
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   pointer-events: none;
+}
+
+.form label::after {
+   content: "";
+   position: absolute;
+   left: 0;
+   bottom: -25px;
+   height: 100%;
+   width: 100%;
+   border-bottom: 3px solid rgb(36, 0, 70);
+   transform: translateX(-100%);
+   transition: all 0.3s ease-in-out;
+}
+
+.content-name {
+   position: absolute;
+   bottom: 5px;
+   left: 0;
+   transition: all 0.3s ease;
+}
+
+.form input:focus + .label-name::after,
+.form input:valid + .label-name::after {
+   transform: translateX(0%);
+}
+
+.form input:focus + .label-name .content-name,
+.form input:valid + .label-name .content-name {
+   transform: translateY(-150%);
+}
