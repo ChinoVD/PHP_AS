@@ -1,0 +1,124 @@
+/* Contenedor principal */
+.contenedor {
+    margin: 20px;
+}
+
+/* Estilos para la tableta */
+.tableta {
+    background-color: #8B4513; /* Color marrón claro para la tableta, simulando madera */
+    border: 1px solid #000000; /* Borde grueso de color marrón oscuro */
+    border-radius: 12px; /* Bordes redondeados para simular una tablilla */
+    padding: 25px; /* Espaciado interno */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra para efecto de profundidad */
+    max-width: 600px; /* Ancho máximo */
+    height: auto; /* Aumentamos la altura para alargar la tableta */
+    margin: 40px auto; /* Centramos la tableta */
+    display: flex;
+    flex-direction: column; /* Asegura que los elementos se apilen verticalmente */
+    align-items: center; /* Centra los elementos horizontalmente */
+}
+
+/* Estilos para el título */
+.titulo {
+    margin: 5px 0px 10px 0px;
+    display: flex;
+    justify-content: center; /* Centra el título horizontalmente */
+    align-items: center; /* Centra el título verticalmente */
+    width: 100%; /* Asegura que el título ocupe todo el ancho de la tableta */
+}
+
+/* Estilos para los campos del formulario */
+.campos {
+    display: grid; /* Cambiar a grid */
+    grid-template-columns: repeat(4, 1fr); /* Cuatro columnas de igual ancho */
+    gap: 15px; /* Espacio entre los elementos del grid */
+    background-color: #ffffff; /* Fondo blanco para destacar */
+    border: 2px solid rgb(36, 0, 70); /* Borde del contenedor */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 20px; /* Espaciado interno */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para un efecto elevado */
+    height: 690px;
+}
+
+/* Estilos para formularios individuales */
+.form {
+    width: 100%; /* Aseguramos que el campo ocupe el 100% */
+}
+
+.nombre {
+    grid-column: 1 / 3; /* Ocupa desde la columna 1 hasta la columna 3 (ocupa dos columnas) */
+}
+
+.apellido {
+    grid-column: 3 / 5;
+}
+
+.rol {
+    grid-column: 1 / 5;
+    height: 70%;
+}
+
+.email {
+    grid-column: 1 / 5;
+}
+
+.password {
+    grid-column: 1 / 3;
+}
+
+.password_2 {
+    grid-column: 3 / 5;
+}
+
+/* Estilos para selects */
+.form select {
+    width: 100%; /* Aseguramos que el select ocupe el 100% */
+    padding: 20px; /* Ajusta el padding según sea necesario */
+    color: rgb(0, 0, 0); /* Color del texto */
+    border: 1px solid rgb(36, 0, 70); /* Añade un borde */
+    border-radius: 5px; /* Bordes redondeados */
+    height: 60px;
+}
+
+/* Botones */
+.botones {
+    display: grid;
+    grid-column: 1 / 5; /* Ocupa todas las columnas */
+    row-gap: 5px; /* Espacio entre los botones */
+}
+
+/* Botón de 'Registrar' */
+button[type="submit"] {
+    background-color: #734924; /* Color marrón acorde a la tableta */
+    color: var(--color-blanco); /* Texto en blanco */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    width: auto; /* Ajustado a 'auto' para evitar que ocupe todo el ancho */
+    margin-bottom: 15px; /* Espaciado debajo del botón */
+}
+
+button[type="submit"]:hover {
+    background-color: #8B4513; /* Marrón más oscuro al pasar el ratón */
+}
+
+/* Botón de '¿Olvidaste tu contraseña?' */
+button.recuperar-contraseña {
+    background-color: transparent; /* Fondo transparente para que no compita con el botón principal */
+    color: #734924; /* Texto marrón oscuro */
+    padding: 10px;
+    border: 2px solid #734924; /* Borde marrón acorde a la tableta */
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    width: 100%; /* Ocupar todo el ancho */
+}
+
+button.recuperar-contraseña:hover {
+    background-color: #734924; /* Fondo marrón */
+    color: var(--color-blanco); /* Texto blanco */
+}
