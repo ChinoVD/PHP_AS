@@ -2,22 +2,44 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-class Usuario extends Model
+class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory;
+    use HasApiTokens, Notifiable, HasFactory;
 
+    /**
+     * Los atributos que son asignables masivamente.
+     *
+     * @var array
+     */
     protected $fillable = [
         'nombre',
-        'apellido',
         'rol',
         'email',
-        'contraseña',
-        'email_veridied_at', // Si necesitas guardarlo en el registro
-        'remember_token', // Si lo necesitas
+        'password', // Cambiado de 'contraseña' a 'password'
     ];
 
-    public $timestamps = true; // Para manejar created_at y updated_at
+    /**
+     * Los atributos que deben ser ocultos para los arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', // Asegúrate de que sea 'password'
+        'remember_token',
+    ];
+
+    /**
+     * Los atributos que deben ser mutados a tipos nativos.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
 }

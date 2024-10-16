@@ -15,9 +15,18 @@
                 <h1>Registro</h1>
             </div>
 
-            <form action="{{ route('registro.procesar') }}" method="POST"> <!-- Agrega el formulario aquí -->
-                @csrf <!-- Este es un token de seguridad para proteger contra ataques CSRF -->
-                <div class="campos"> <!-- Aquí se agrega la clase campos -->
+            <form action="{{ route('validar-registro') }}" method="POST">
+                @csrf
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <div class="campos">
                     <div class="form nombre">
                         <input type="text" name="nombre" id="nombre" autocomplete="off" required />
                         <label for="nombre" class="label-name">
@@ -48,14 +57,14 @@
                     </div>
 
                     <div class="form password">
-                        <input type="password" name="password" id="password" autocomplete="off" required />
+                        <input type="password" name="contraseña" id="password"  autocomplete="off" required />
                         <label for="password" class="label-name">
                             <span class="content-name">Contraseña:</span>
                         </label>
                     </div>
 
                     <div class="form password_2">
-                        <input type="password" name="password_confirmacion" id="repeat_password" autocomplete="off" required />
+                        <input type="password" name="contraseña_confirmation" id="repeat_password"  autocomplete="off" required />
                         <label for="repeat_password" class="label-name">
                             <span class="content-name">Repetir Contraseña:</span>
                         </label>
@@ -66,7 +75,7 @@
                         <button type="submit">Registrar</button>
                     </div>
                 </div>
-            </form> <!-- Cierra el formulario aquí -->
+            </form>
         </div>
     </div>
 </body>

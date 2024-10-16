@@ -1,19 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RegistroController; // Asegúrate de que esté al inicio
-
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
+use App\Http\Controllers\LoginController;
 
 // Redirigir la ruta principal (/) a la página de inicio de sesión
 Route::get('/', function () {
     return redirect()->route('login');
 });
 
-// Mostrar el formulario de registro
-Route::get('/registro', [RegistroController::class, 'showRegistroForm'])->name('registro');
+// Rutas de la aplicación
+Route::view('/login', 'login')->name('login'); // Vista de inicio de sesión
+Route::view('/registro', 'registro')->name('registro'); // Vista de registro
+Route::view('/home_registrado', 'home_registrado')->middleware('auth')->name('privada'); // Vista usuario registrado
 
-// Procesar el registro (almacenar en la base de datos)
-Route::post('/registro', [RegistroController::class, 'procesar'])->name('registro.procesar');
+// Rutas de autenticación
+Route::post('/validar-registro', [LoginController::class, 'register'])->name('validar-registro'); // Validar registro
+Route::post('/inicia-sesion', [LoginController::class, 'login'])->name('inicia-sesion'); // Iniciar sesión
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout'); // Cerrar sesión
