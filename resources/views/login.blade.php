@@ -29,8 +29,12 @@
 
             <button type="submit">Iniciar Sesión</button>
         </div>
+
+        <!-- Botón para redirigir a la página de registro -->
+        <div class="registrarse">
+            <p>¿No tienes una cuenta? <a href="/registro">Regístrate</a></p>
+        </div>
     </div>
 </div>
-
 </body>
 </html>

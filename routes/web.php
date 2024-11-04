@@ -11,6 +11,7 @@ Route::get('/', function () {
 // Rutas de la aplicación
 Route::view('/login', 'login')->name('login'); // Vista de inicio de sesión
 Route::view('/registro', 'registro')->name('registro'); // Vista de registro
+Route::view('/formulario_emergencia', 'formulario_emergencia')->name('formulario_emergencia'); // Vista de registro
 Route::view('/home_registrado', 'home_registrado')->middleware('auth')->name('privada'); // Vista usuario registrado
 
 // Rutas de autenticación
