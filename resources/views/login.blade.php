@@ -12,23 +12,27 @@
 <div class="contenedor">
     <div class="registro">
         <h1>Iniciar Sesión</h1>
-        <div class="campos">
-            <div class="form">
-                <input type="email" name="email" id="email" autocomplete="off" required />
-                <label for="email" class="label-name">
-                    <span class="content-name">Correo Electrónico</span>
-                </label>
-            </div>
+        <form method="POST" action="{{ route('login') }}"> <!-- Agrega esto -->
+            @csrf <!-- Asegúrate de incluir el token CSRF -->
 
-            <div class="form">
-                <input type="password" name="password" id="password" autocomplete="off" required />
-                <label for="password" class="label-name">
-                    <span class="content-name">Contraseña</span>
-                </label>
-            </div>
+            <div class="campos">
+                <div class="form">
+                    <input type="email" name="email" id="email" autocomplete="off" required />
+                    <label for="email" class="label-name">
+                        <span class="content-name">Correo Electrónico</span>
+                    </label>
+                </div>
 
-            <button type="submit">Iniciar Sesión</button>
-        </div>
+                <div class="form">
+                    <input type="password" name="password" id="password" autocomplete="off" required />
+                    <label for="password" class="label-name">
+                        <span class="content-name">Contraseña</span>
+                    </label>
+                </div>
+
+                <button type="submit">Iniciar Sesión</button>
+            </div>
+        </form>
 
         <!-- Botón para redirigir a la página de registro -->
         <div class="registrarse">

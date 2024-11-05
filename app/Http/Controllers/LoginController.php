@@ -2,66 +2,90 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request; // Corrección de typo
-use App\Models\User; // Asegúrate de que sea el nombre correcto de tu modelo
+use Illuminate\Http\Request;
+use App\Models\Empleado;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log; // Importa Log aquí
 
 class LoginController extends Controller
 {
-    public function register(Request $request) // Corrección de typo
+    // Método para mostrar el formulario de inicio de sesión
+    public function showLoginForm()
     {
-       // Validación
-    $request->validate([
-        'nombre' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255|unique:users',
-        'contraseña' => 'required|string|min:8|confirmed',
-        'rol' => 'required|string',
-    ]);
-
-    $user = new User(); // Cambiado de "usuario" a "user"
-
-    $user->nombre = $request->nombre;
-    $user->email = $request->email;
-    $user->rol = $request->rol;
-    $user->password = Hash::make($request->contraseña); // Aquí sigue usando "contraseña", pero considera cambiarlo a "password"
-
-    $user->save();
-
-    Auth::login($user); // Cambiado de "usuario" a "user"
-
-    return redirect(route('privada'));
-}
-
-public function login(Request $request)
-{
-    // Validación
-    $request->validate([
-        'email' => 'required|string|email',
-        'contraseña' => 'required|string',
-    ]);
-
-    $credentials = [
-        "email" => $request->email,
-        "contraseña" => $request->contraseña,
-    ];
-
-    $remember = $request->has('remember');
-
-    if (Auth::attempt($credentials, $remember)) {
-        $request->session()->regenerate();
-        return redirect()->intended(route('privada'));
-    } else {
-        return redirect('login')->withErrors(['email' => 'Las credenciales son incorrectas.']);
+        return view('login');
     }
-}
 
-public function logout(Request $request)
-{
-    Auth::logout();
-    $request->session()->invalidate();
-    $request->session()->regenerateToken();
+    // Método para mostrar el formulario de registro
+    public function showRegisterForm()
+    {
+        return view('registro');
+    }
 
-    return redirect(route('login'));
+    public function register(Request $request)
+    {
+        // Validación
+        $request->validate([
+            'rut' => 'required|string|max:10|unique:empleados',
+            'nombre' => 'required|string|max:255',
+            'apellido' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:empleados',
+            'password' => 'required|string|min:8|confirmed',
+            'rol' => 'required|in:medico,enfermero,administrador,paramedico',
+            'telefono' => 'nullable|string|max:15',
+            'direccion' => 'nullable|string|max:255',
+        ]);
+
+        $empleado = new Empleado();
+
+        // Asignar valores
+        $empleado->rut = $request->rut;
+        $empleado->nombre = $request->nombre;
+        $empleado->apellido = $request->apellido;
+        $empleado->email = $request->email;
+        $empleado->rol = $request->rol;
+        $empleado->password = Hash::make($request->password);
+        $empleado->telefono = $request->telefono;
+        $empleado->direccion = $request->direccion;
+
+        $empleado->save();
+
+        Auth::login($empleado);
+
+        return redirect(route('privada'));
+    }
+
+    public function login(Request $request)
+    {
+        Log::info('Intento de inicio de sesión', $request->all()); // Log para depuración
+        // Validación
+        $request->validate([
+            'email' => 'required|string|email',
+            'password' => 'required|string', // Corrige el campo a "password"
+        ]);
+
+        $credentials = $request->only('email', 'password');
+
+        $remember = $request->has('remember');
+
+        if (Auth::attempt($credentials)) {
+            Log::info('Inicio de sesión exitoso', ['user_id' => Auth::id()]);
+            // Redirigir al usuario a la página deseada
+            $request->session()->regenerate(); // Regenerar la sesión
+            return redirect()->route('privada');
+        } else {
+            Log::warning('Fallo en el inicio de sesión', $credentials);
+            // Retornar un mensaje de error al usuario
+            return redirect()->back()->withErrors(['email' => 'Las credenciales son incorrectas.']);
+        }
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect(route('login'));
     }
 }

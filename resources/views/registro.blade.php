@@ -40,12 +40,28 @@
                             <span class="content-name">Apellido:</span>
                         </label>
                     </div>
+
+                    <div class="form rut">
+                        <input type="text" name="rut" id="rut" autocomplete="off" required />
+                        <label for="rut" class="label-name">
+                            <span class="content-name">Rut:</span>
+                        </label>
+                    </div>
+
+                    <div class="form direccion">
+                        <input type="text" name="direccion" id="direccion" autocomplete="off" required />
+                        <label for="direccion" class="label-name">
+                            <span class="content-name">Dirección:</span>
+                        </label>
+                    </div>
                     
                     <div class="form rol">
                         <select name="rol" id="rol" required>
                             <option value="" disabled selected>Seleccione su rol</option>
                             <option value="medico">Médico</option>
                             <option value="enfermero">Enfermero</option>
+                            <option value="administrador">Administrador</option>
+                            <option value="paramedico">Paramédico</option>
                         </select>
                     </div>
 
@@ -56,20 +72,27 @@
                         </label>
                     </div>
 
+                    <div class="form telefono">
+                        <input type="text" name="telefono" id="telefono" autocomplete="off" required />
+                        <label for="telefono" class="label-name">
+                            <span class="content-name">Teléfono:</span>
+                        </label>
+                    </div>
+
                     <div class="form password">
-                        <input type="password" name="contraseña" id="password"  autocomplete="off" required />
+                        <input type="password" name="password" id="password" autocomplete="off" required />
                         <label for="password" class="label-name">
                             <span class="content-name">Contraseña:</span>
                         </label>
                     </div>
 
                     <div class="form password_2">
-                        <input type="password" name="contraseña_confirmation" id="repeat_password"  autocomplete="off" required />
+                        <input type="password" name="password_confirmation" id="repeat_password" autocomplete="off" required />
                         <label for="repeat_password" class="label-name">
                             <span class="content-name">Repetir Contraseña:</span>
                         </label>
                     </div>
-                    
+
                     <div class="botones">
                         <button type="button" class="recuperar-contraseña">¿Olvidaste tu contraseña?</button>  
                         <button type="submit">Registrar</button>
