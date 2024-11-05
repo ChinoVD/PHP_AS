@@ -12,7 +12,7 @@
 <div class="contenedor">
     <div class="registro">
         <h1>Iniciar Sesión</h1>
-        <form method="POST" action="{{ route('login') }}"> <!-- Agrega esto -->
+        <form method="POST" action="{{ route('login') }}">
             @csrf <!-- Asegúrate de incluir el token CSRF -->
 
             <div class="campos">
@@ -32,6 +32,11 @@
 
                 <button type="submit">Iniciar Sesión</button>
             </div>
+        </form>
+
+        <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+            @csrf <!-- Asegúrate de incluir el token CSRF -->
+            <button type="submit" class="btn btn-danger">Cerrar Sesión</button>
         </form>
 
         <!-- Botón para redirigir a la página de registro -->

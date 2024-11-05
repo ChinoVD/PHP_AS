@@ -72,15 +72,31 @@
                 <span class="date">{{ date('d-m-Y') }}</span>
             </div>
             <ul>
-                @foreach($notificaciones as $index => $notificacion)
-                    <li class="bi bi-chat-left-text" onclick="toggleDetails({{ $index }})" data-detalles='@json($notificacion)'>
-                        <div class="column">
-                            <span class="notif-title">{{ $notificacion['titulo'] }}</span>
-                            <span class="notif-content">{{ $notificacion['contenido'] }}</span>
-                        </div>
-                    </li>
-                @endforeach
+                @if(isset($notificaciones) && count($notificaciones) > 0)
+                    @foreach($notificaciones as $index => $notificacion)
+                        <li class="bi bi-chat-left-text" onclick="toggleDetails({{ $index }})" data-detalles='@json($notificacion)'>
+                            <div class="column">
+                                <span class="notif-title">Código: {{ $notificacion['nombre_codigo'] }}</span>
+                                <span class="notif-content">Descripción: {{ $notificacion['descripcion'] }}</span>
+                            </div>
+                        </li>
+                    @endforeach
+                @else
+                    <li>No hay notificaciones disponibles.</li>
+                @endif
             </ul>
+        </div>
+
+        <!-- Nueva sección para detalles del paciente -->
+        <div class="card informacion_paciente">
+            <div class="header">
+                <span class="title">Información del Paciente</span>
+            </div>
+            <div class="details">
+                <div class="info_paciente_entrada">
+                    <!-- Aquí no puedes usar $notificacion directamente, necesitarás un mecanismo para mostrar los datos correctos -->
+                </div>
+            </div>
         </div>
 
         <!-- Tarjeta de empleados en turno -->
@@ -90,49 +106,24 @@
                 <span class="date">{{ date('d-m-Y') }}</span>
             </div>
             <ul>
-                <li class="bi bi-person">
-                    <div class="column">
-                        <span class="employee-name">Empleado Título 1</span>
-                        <span class="employee-role">Rol del Empleado 1</span>
-                    </div>
-                </li>
-                <li class="bi bi-person">
-                    <div class="column">
-                        <span class="employee-name">Empleado Título 2</span>
-                        <span class="employee-role">Rol del Empleado 2</span>
-                    </div>
-                </li>
-                <li class="bi bi-person">
-                    <div class="column">
-                        <span class="employee-name">Empleado Título 3</span>
-                        <span class="employee-role">Rol del Empleado 3</span>
-                    </div>
-                </li>
+                @foreach($empleadosEnTurno as $empleado)
+                    <li class="bi bi-person">
+                        <div class="column">
+                            <span class="employee-name">{{ $empleado['nombre'] }}</span>
+                            <span class="employee-rut">{{ $empleado['rut'] }}</span>
+                            <span class="employee-hours">{{ $empleado['hora_inicio'] }} - {{ $empleado['hora_fin'] }}</span>
+                            <span class="employee-shift">{{ $empleado['turno'] }}</span>
+                        </div>
+                    </li>
+                @endforeach
             </ul>
         </div>
-
-        <!-- Información del paciente -->
-      
-<div class="informacion_paciente">
-    <div class="info_paciente_entrada" id="info_paciente">
-        <p><strong>RUT:</strong> <span id="rut_paciente">Desconocido</span></p>
-        <p><strong>Causas:</strong> <span id="causas_paciente">Desconocido</span></p>
-        <p><strong>Nombre del Paciente:</strong> <span id="nombre_paciente">Desconocido</span></p>
-        <p><strong>Edad:</strong> <span id="edad_paciente">Desconocida</span> años</p>
     </div>
-    <div class="observaciones_paciente" style="display: none;" id="observaciones_paciente">
-        <p><strong>Descripción:</strong> <span id="descripcion_paciente">Desconocida</span></p>
-    </div>
-    <div class="historial_clinico">
-        <p><strong>Diagnóstico:</strong> <span id="diagnostico_paciente">Desconocido</span></p>
-        <p><strong>Tratamiento:</strong> <span id="tratamiento_paciente">Desconocido</span></p>
-    </div>
-</div>
 
     <!-- Enlace al JavaScript de Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Enlace a tu archivo JavaScript externo -->
     <script src="{{ asset('js/notificaciones.js') }}"></script>
-    <!-- <script src="{{ asset('js/mosotrarDetalles.js') }}"></script> -->
+    <script src="{{ asset('js/mostrarDetalles.js') }}"></script>
 </body>
 </html>

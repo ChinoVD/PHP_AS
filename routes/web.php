@@ -1,8 +1,8 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NotificacionesController;
+use App\Http\Controllers\EmpleadosController;
 
 // Redirigir la ruta principal (/) a la página de inicio de sesión
 Route::get('/', function () {
@@ -10,19 +10,16 @@ Route::get('/', function () {
 });
 
 // Rutas de la aplicación
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login'); // Mostrar el formulario de inicio de sesión
-Route::post('/login', [LoginController::class, 'login'])->name('inicia-sesion'); // Procesar el inicio de sesión
-Route::get('/registro', [LoginController::class, 'showRegisterForm'])->name('registro'); // Mostrar el formulario de registro
-Route::post('/validar-registro', [LoginController::class, 'register'])->name('validar-registro'); // Procesar el registro
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login'])->name('inicia-sesion');
+Route::get('/registro', [LoginController::class, 'showRegisterForm'])->name('registro');
+Route::post('/validar-registro', [LoginController::class, 'register'])->name('validar-registro');
 
-// Ruta para la vista protegida por autenticación
-Route::view('/home_registrado', 'home_registrado')->name('privada'); // Sin el middleware 'auth'
+// Ruta para la vista protegida por autenticación con controlador de notificaciones
+Route::get('/home_registrado', [EmpleadosController::class, 'index'])->name('privada');
 
 // Ruta para la vista del formulario de emergencia
 Route::view('/formulario_emergencia', 'formulario_emergencia')->name('emergencia'); 
 
 // Ruta para cerrar sesión
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout'); 
-
-// Ruta para la vista protegida por autenticación con controlador de notificaciones
-Route::get('/home_registrado', [NotificacionesController::class, 'index']);
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout'); 
